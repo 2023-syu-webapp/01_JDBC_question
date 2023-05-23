@@ -3,4 +3,30 @@
 <properties>
     <comment/>
     <!-- 쿼리 작성 -->
+    <entry key="insertEmployee">
+        INSERT INTO EMPLOYEE (EMP_ID, EMP_NAME, EMP_NO, EMAIL,
+        PHONE, DEPT_CODE, JOB_CODE, SAL_LEVEL, SALARY, BONUS, MANAGER_ID, HIRE_DATE, ENT_DATE, ENT_YN)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    </entry>
+    <entry key="selectEmployee">
+        SELECT E.EMP_ID, E.EMP_NAME, E.EMP_NO, E.EMAIL, E.PHONE,
+        E.DEPT_CODE, E.JOB_CODE, E.SAL_LEVEL, E.SALARY, E.BONUS, E.MANAGER_ID, E.HIRE_DATE, E.ENT_DATE,
+        E.ENT_YN, J.JOB_NAME, D.DEPT_TITLE
+        FROM EMPLOYEE E
+        JOIN JOB J ON E.JOB_CODE=J.JOB_CODE
+        JOIN DEPARTMENT D ON E.DEPT_CODE=D.DEPT_ID
+        WHERE EMP_ID = ?
+    </entry>
+    <entry key="updateEmployee">
+        UPDATE EMPLOYEE
+        SET EMAIL = ?
+        , DEPT_CODE = ?
+        , SALARY = ?
+        , BONUS = ?
+        WHERE EMP_ID = ?
+    </entry>
+    <entry key="deleteEmployee">
+        DELETE FROM employee
+        WHERE EMP_NAME = ?
+    </entry>
 </properties>
