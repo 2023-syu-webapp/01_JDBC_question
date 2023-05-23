@@ -3,4 +3,15 @@
 <properties>
     <comment/>
     <!-- 쿼리 작성 -->
+    <entry key="selectEmpByFamilyName">
+        SELECT
+        E.*
+        FROM EMPLOYEE E
+        WHERE E.EMP_NAME LIKE CONCAT(?, '%')
+    </entry>
+    <entry key="deleteMenu">
+        DELETE
+        FROM EMPLOYEE
+        WHERE EMP_NAME = ?
+    </entry>
 </properties>
