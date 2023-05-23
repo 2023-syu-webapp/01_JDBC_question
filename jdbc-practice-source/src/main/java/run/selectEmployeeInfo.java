@@ -61,6 +61,8 @@ public class selectEmployeeInfo {
                 selectedEmp.setHireDate(rset.getDate("HIRE_DATE"));
                 selectedEmp.setEntDate(rset.getDate("ENT_DATE"));
                 selectedEmp.setEntYn(rset.getString("ENT_YN"));
+                selectedEmp.setJobName(rset.getString("JOB_NAME"));
+                selectedEmp.setDeptTitle(rset.getString("DEPT_TITLE"));
             }
 
         } catch (IOException | SQLException e) {
@@ -73,7 +75,7 @@ public class selectEmployeeInfo {
 
         if (selectedEmp != null) {
             System.out.println(selectedEmp);
-            System.out.println(selectedEmp.getEmpName() + "(" + selectedEmp.getDeptCode() + ") " + selectedEmp.getSalLevel() + "님 환영합니다.");
+            System.out.println(selectedEmp.getEmpName() + "(" + selectedEmp.getDeptTitle() + ") " + selectedEmp.getJobName() + "님 환영합니다.");
         }
     }
 

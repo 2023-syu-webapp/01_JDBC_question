@@ -4,9 +4,9 @@
     <comment/>
     <!-- 쿼리 작성 -->
     <entry key="selectEmp">
-        SELECT E.*
-        FROM EMPLOYEE E
-        WHERE E.EMP_ID = ?
+        SELECT E.*, J.JOB_NAME, D.DEPT_TITLE
+        FROM EMPLOYEE E, JOB J, DEPARTMENT D
+        WHERE E.JOB_CODE = J.JOB_CODE AND E.DEPT_CODE = D.DEPT_ID AND E.EMP_ID = ?
     </entry>
 
     <entry key="insertEmp">

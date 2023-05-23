@@ -20,11 +20,13 @@ public class EmployeeDTO {
     private java.sql.Date hireDate;
     private java.sql.Date entDate;
     private String entYn;
+    private String jobName;
+    private String deptTitle;
 
     public EmployeeDTO() {
     }
 
-    public EmployeeDTO(String empId, String empName, String empNo, String email, String phone, String deptCode, String jobCode, String salLevel, int salary, double bonus, String managerId, Date hireDate, Date entDate, String entYn) {
+    public EmployeeDTO(String empId, String empName, String empNo, String email, String phone, String deptCode, String jobCode, String salLevel, int salary, double bonus, String managerId, Date hireDate, Date entDate, String entYn, String jobName, String deptTitle) {
         this.empId = empId;
         this.empName = empName;
         this.empNo = empNo;
@@ -39,6 +41,8 @@ public class EmployeeDTO {
         this.hireDate = hireDate;
         this.entDate = entDate;
         this.entYn = entYn;
+        this.jobName = jobName;
+        this.deptTitle = deptTitle;
     }
 
     public String getEmpId() {
@@ -153,6 +157,22 @@ public class EmployeeDTO {
         this.entYn = entYn;
     }
 
+    public String getJobName() {
+        return jobName;
+    }
+
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
+    }
+
+    public String getDeptTitle() {
+        return deptTitle;
+    }
+
+    public void setDeptTitle(String deptTitle) {
+        this.deptTitle = deptTitle;
+    }
+
     @Override
     public String toString() {
         return "EmployeeDTO{" +
@@ -163,13 +183,15 @@ public class EmployeeDTO {
                 ", phone='" + phone + '\'' +
                 ", deptCode='" + deptCode + '\'' +
                 ", jobCode='" + jobCode + '\'' +
-                ", selLevel='" + salLevel + '\'' +
+                ", salLevel='" + salLevel + '\'' +
                 ", salary=" + salary +
                 ", bonus=" + bonus +
                 ", managerId='" + managerId + '\'' +
                 ", hireDate=" + hireDate +
                 ", entDate=" + entDate +
                 ", entYn='" + entYn + '\'' +
+                ", jobName='" + jobName + '\'' +
+                ", deptTitle='" + deptTitle + '\'' +
                 '}';
     }
 }
