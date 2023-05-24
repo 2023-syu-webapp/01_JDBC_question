@@ -22,7 +22,7 @@ public class deleteEmployeeInfo {
         Properties prop = new Properties();
 
         try {
-            prop.loadFromXML(new FileInputStream("src/main/java/mapper/menu-query.xml"));
+            prop.loadFromXML(new FileInputStream("jdbc-practice-source/src/main/java/mapper/employee-query.xml"));
             String query = prop.getProperty("deleteMenu");
 
             System.out.println(query);
@@ -33,8 +33,14 @@ public class deleteEmployeeInfo {
 
             pstmt = con.prepareStatement(query);
             pstmt.setString(1, empName);
-
             result = pstmt.executeUpdate();
+
+
+        if (result > 0) {
+            System.out.println(empName + "님이 퇴출되었습니다.");
+        } else {
+            System.out.println(empName + "님은 퇴출될 수 없습니다.");
+        }
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -45,13 +51,7 @@ public class deleteEmployeeInfo {
             close(con);
         }
 
-        if(result > 0) {
-            System.out.println("메뉴 등록 성공!");
-        } else {
-            System.out.println("메뉴 등록 실패!");
-        }
-
-    }
+       }
     }
     // 삭제할 사원의 이름을 사용자로부터 입력받아 삭제
     // 이름이 정확히 일치해야 함

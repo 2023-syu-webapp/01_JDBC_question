@@ -1,5 +1,7 @@
 package model.dto;
 
+import java.sql.Date;
+
 public class EmployeeDTO {
 
     // employee table과 매핑되도록 DTO 작성
@@ -16,6 +18,8 @@ public class EmployeeDTO {
     private Float bonus;
     private int managerId;
     private String entYn;
+    private java.sql.Date hireDate;
+    private java.sql.Date entDate;
 
     public EmployeeDTO() {}
 
@@ -23,7 +27,7 @@ public class EmployeeDTO {
         this.empName = empName;
     }
 
-    public EmployeeDTO(int empId, String empName, int empNo, String email, int phone, String deptCode, int jobCode, String salLevel, int salary, Float bonus, int managerId, String entYn){
+    public EmployeeDTO(int empId, String empName, int empNo, String email, int phone, String deptCode, int jobCode, String salLevel, int salary, Float bonus, int managerId,Date hireDate, Date entDate ,String entYn){
 
         this.empId = empId;
         this.empName = empName;
@@ -37,25 +41,32 @@ public class EmployeeDTO {
         this.bonus = bonus;
         this.managerId = managerId;
         this.entYn = entYn;
+        this.hireDate = hireDate;
+        this.entDate = entDate;
     }
 
     public int getEmpId() {
+
         return empId;
     }
 
     public void setEmpId(int empId) {
+
         this.empId = empId;
     }
 
     public void setEmpNo(int empNo) {
+
         this.empNo = empNo;
     }
 
     public void setEmail(String email) {
+
         this.email = email;
     }
 
     public void setPhone(int phone) {
+
         this.phone = phone;
     }
 
@@ -64,70 +75,101 @@ public class EmployeeDTO {
     }
 
     public void setJobCode(int jobCode) {
+
         this.jobCode = jobCode;
     }
 
     public void setSalLevel(String salLevel) {
+
         this.salLevel = salLevel;
     }
 
     public void setSalary(int salary) {
+
         this.salary = salary;
     }
 
     public void setBonus(Float bonus) {
+
         this.bonus = bonus;
     }
 
     public void setManagerId(int managerId) {
+
         this.managerId = managerId;
     }
 
     public void setEntYn(String entYn) {
+
         this.entYn = entYn;
     }
 
+
+    public Date getHireDate() {
+        return hireDate;
+    }
+
+    public void setHireDate(Date hireDate) {
+        this.hireDate = hireDate; }
+
+    public Date getEntDate() {
+        return entDate; }
+
+    public void setEntDate(Date entDate) {
+        this.entDate = entDate;}
+
     public String getEmpName() {
+
         return empName;
     }
 
     public int getEmpNo() {
+
         return empNo;
     }
 
     public String getEmail() {
+
         return email;
     }
 
     public int getPhone() {
+
         return phone;
     }
 
     public String getDeptCode() {
+
         return deptCode;
     }
 
     public int getJobCode() {
+
         return jobCode;
     }
 
     public String getSalLevel() {
+
         return salLevel;
     }
 
     public int getSalary() {
+
         return salary;
     }
 
     public Float getBonus() {
+
         return bonus;
     }
 
     public int getManagerId() {
+
         return managerId;
     }
 
     public String getEntYn() {
+
         return entYn;
     }
 
