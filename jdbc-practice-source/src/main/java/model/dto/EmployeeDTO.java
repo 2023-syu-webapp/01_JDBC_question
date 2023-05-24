@@ -28,10 +28,28 @@ public class EmployeeDTO implements java.io.Serializable{
     private java.sql.Date hireDate;
     private java.sql.Date entDate;
     private String entYn;
+    private String jobName;
+    private String DeptTitle;
+
+    public String getJobName() {
+        return jobName;
+    }
+
+    public void setJobName(String jobName) {
+        this.jobName = jobName;
+    }
+
+    public String getDeptTitle() {
+        return DeptTitle;
+    }
+
+    public void setDeptTitle(String deptTitle) {
+        this.DeptTitle = deptTitle;
+    }
 
     public EmployeeDTO() {}
 
-    public EmployeeDTO(String empId, String empName, String empNo, String email, String phone, String deptCode, String jobCode, String salLevel, int salary, double bonus, String managerId, Date hireDate, Date entDate, String entYn) {
+    public EmployeeDTO(String empId, String empName, String empNo, String email, String phone, String deptCode, String jobCode, String salLevel, int salary, double bonus, String managerId, Date hireDate, Date entDate, String entYn, String jobName, String deptTitle) {
         this.empId = empId;
         this.empName = empName;
         this.empNo = empNo;

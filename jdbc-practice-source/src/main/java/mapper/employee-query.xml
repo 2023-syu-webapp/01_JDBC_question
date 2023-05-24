@@ -9,16 +9,20 @@
     </entry>
     <entry key="insertEmp">
         INSERT
-        INTO TBL_MENU (EMP_ID, EMP_NAME, EMP_NO, EMAIL, PHONE, DEPT_CODE, JOB_CODE, SAL_LEVEL, SALARY, BONUS, MANAGER_ID, HIRE_DATE, ENT_DATE, ENT_YN)
+        INTO EMPLOYEE  (EMP_ID, EMP_NAME, EMP_NO, EMAIL, PHONE, DEPT_CODE, JOB_CODE, SAL_LEVEL, SALARY, BONUS, MANAGER_ID, HIRE_DATE, ENT_DATE, ENT_YN)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     </entry>
-    <entry key="selectEmp">
-        SELECT EMP_NAME, DEPT_CODE, JOB_CODE
-        FROM EMPLOYEE
-        WHERE EMP_ID = ?
+    <entry key="joinSelectEmp">
+        SELECT a.DEPT_TITLE,
+        b.EMP_NAME,
+        c.JOB_NAME
+        FROM DEPARTMENT a, EMPLOYEE b, JOB c
+        WHERE a.DEPT_ID=b.DEPT_CODE
+        AND b.JOB_CODE=c.JOB_CODE
+        AND EMP_ID = ?
     </entry>
     <entry key="updateEmp">
-        UPDATE EMPLOYEE
+        UPDATE EMPLOYEE SET
         PHONE  = ?
         ,EMAIL = ?
         ,DEPT_CODE = ?
