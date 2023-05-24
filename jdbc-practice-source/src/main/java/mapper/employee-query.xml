@@ -3,4 +3,29 @@
 <properties>
     <comment/>
     <!-- 쿼리 작성 -->
+    <entry key="selectMenu">
+        SELECT EMPLOYEE.*, DEPT_TITLE, JOB_NAME
+        FROM EMPLOYEE
+        JOIN DEPARTMENT ON EMPLOYEE.DEPT_CODE = DEPARTMENT.DEPT_ID
+        JOIN JOB ON EMPLOYEE.JOB_CODE = JOB.JOB_CODE
+        WHERE EMP_ID = ?
+    </entry>
+    <entry key="insertMenu">
+        INSERT INTO EMPLOYEE (EMP_ID, EMP_NAME, EMP_NO, EMAIL, PHONE, DEPT_CODE, JOB_CODE, SAL_LEVEL, SALARY, BONUS, MANAGER_ID, HIRE_DATE, ENT_DATE, ENT_YN)
+        VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+    </entry>
+    <entry key="updateMenu">
+        UPDATE EMPLOYEE
+            SET PHONE = ?
+                ,EMAIL = ?
+                ,DEPT_CODE = ?
+                ,SALARY = ?
+                ,BONUS = ?
+        WHERE EMP_ID = ?
+    </entry>
+    <entry key="deleteMenu">
+        DELETE
+        FROM EMPLOYEE
+        WHERE EMP_NAME =?
+    </entry>
 </properties>
