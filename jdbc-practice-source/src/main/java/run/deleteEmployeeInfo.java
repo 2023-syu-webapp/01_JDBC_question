@@ -1,6 +1,61 @@
 package run;
 
+import model.dto.EmployeeDTO;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Properties;
+import java.util.Scanner;
+
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.getConnection;
+
 public class deleteEmployeeInfo {
+    public static void main(String[] args) {
+
+        Connection con = getConnection();
+
+        PreparedStatement pstmt = null;
+        int result = 0;
+
+        Properties prop = new Properties();
+
+        try {
+            prop.loadFromXML(new FileInputStream("src/main/java/mapper/employee-query.xml"));
+
+            String query = prop.getProperty("deleteEmployee");
+
+            Scanner sc = new Scanner(System.in);
+            System.out.print("삭제할 사원 이름을 입력하세요 : ");
+            String empName = sc.nextLine();
+
+            EmployeeDTO employeeDTO = new EmployeeDTO();
+            employeeDTO.setEmpName(empName);
+
+            pstmt = con.prepareStatement(query);
+
+            pstmt.setString(1, employeeDTO.getEmpName());
+
+            result = pstmt.executeUpdate();
+
+            if(result > 0){
+                System.out.println(employeeDTO.getEmpName() + "님이 퇴출되었습니다.");
+            } else {
+                System.out.println(employeeDTO.getEmpName() + "님이 퇴출되지 않았습니다..");
+            }
+        } catch (
+                IOException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(con);
+            close(pstmt);
+        }
+
+    }
+
 
     // 삭제할 사원의 이름을 사용자로부터 입력받아 삭제
     // 이름이 정확히 일치해야 함
@@ -8,3 +63,4 @@ public class deleteEmployeeInfo {
     // 사원 삭제에 실패하면 "[이름]님은 퇴출될 수 없습니다." 출력
 
 }
+
