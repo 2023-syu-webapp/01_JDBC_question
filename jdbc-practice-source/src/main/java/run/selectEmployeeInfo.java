@@ -1,6 +1,80 @@
 package run;
 
+import model.dto.EmployeeDTO;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Properties;
+import java.util.Scanner;
+
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.getConnection;
+
 public class selectEmployeeInfo {
+    public static void main(String[] args) {
+
+        Connection con = getConnection();
+
+        PreparedStatement pstmt = null;
+
+        ResultSet rset = null;
+
+        Properties prop = new Properties();
+
+        EmployeeDTO row = null;
+        try {
+            prop.loadFromXML(new FileInputStream("src/main/java/mapper/employee-query.xml"));
+
+            String query = prop.getProperty("selectEmployee");
+
+            Scanner sc = new Scanner(System.in);
+
+            System.out.print("조회할 사원 번호를 입력하세요 : ");
+            String empNo = sc.nextLine();
+
+            pstmt = con.prepareStatement(query);
+
+            pstmt.setString(1, empNo);
+
+            rset = pstmt.executeQuery();
+
+            while (rset.next()) {
+                row = new EmployeeDTO();
+                row.setEmpName(rset.getString("EMP_NAME"));
+                row.setEmpNo(rset.getString("EMP_NO"));
+                row.setEmail(rset.getString("EMAIL"));
+                row.setDeptCode(rset.getString("DEPT_CODE"));
+                row.setJobCode(rset.getString("JOB_CODE"));
+                row.setSalLevel(rset.getString("SAL_LEVEL"));
+                row.setSalary(rset.getInt("SALARY"));
+                row.setBonus(rset.getDouble("BONUS"));
+                row.setManagerId(rset.getInt("MANAGER_ID"));
+                row.setHireDate(rset.getDate("HIRE_DATE"));
+                row.setEndDate(rset.getDate("ENT_DATE"));
+                row.setEntYn(rset.getString("ENT_YN"));
+            }
+
+
+        } catch (
+                IOException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(con);
+            close(pstmt);
+        }
+
+        System.out.println(row.toString());
+        System.out.println(row.getEmpName() + row.getDeptCode() + row.getJobCode() + "님 환영합니다.");
+
+
+    }
+
+
 
     // 사원 번호를 입력받아 해당 사원을 조회하고 DTO객체에 담아서 출력
     // 출력 구문은 DTO 객체의 toString() 내용과
