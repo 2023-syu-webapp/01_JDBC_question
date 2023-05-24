@@ -3,4 +3,28 @@
 <properties>
     <comment/>
     <!-- 쿼리 작성 -->
+    <entry key="selectEmpByFamilyName">
+        SELECT
+        E.*
+        FROM EMPLOYEE E
+        WHERE E.EMP_NAME LIKE CONCAT(?, '%')
+    </entry>
+    <entry key="deleteMenu">
+        DELETE
+        FROM EMPLOYEE
+        WHERE EMP_NAME = ?
+    </entry>
+    <entry key="insertMenu">
+        INSERT INTO EMPLOYEE
+        (EMP_ID, EMP_NAME, EMP_NO, EMAIL, PHONE, DEPT_CODE, JOB_CODE, SAL_LEVEL, SALARY, BONUS, MANAGER_ID, HIRE_DATE, ENT_YN)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    </entry>
+    <entry key="updateEmployee">
+        UPDATE EMPLOYEE
+        SET EMAIL = ?
+        , DEPT_CODE = ?
+        , SALARY = ?
+        , BONUS = ?
+        WHERE EMP_ID = ?
+    </entry>
 </properties>
