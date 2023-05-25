@@ -3,4 +3,24 @@
 <properties>
     <comment/>
     <!-- 쿼리 작성 -->
+    <entry key="insertMenu">
+        INSERT INTO EMPLOYEE EMP_ID, EMP_NAME, EMP_NO, EMAIL, PHONE, DEPT_CODE, JOB_CODE, SAL_LEVEL, SALARY, BONUS, MANAGER_ID, HIRE_DATE, ENT_DATE, ENT_YN)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    </entry>
+    <entry key="updateMenu">
+        UPDATE EMPLOYEE
+        SET EMP_NAME = ?, EMP_NO = ?, EMAIL = ?, PHONE = ?, DEPT_CODE = ?, JOB_CODE = ?, SAL_LEVEL = ?, SALARY = ?, BONUS = ?, MANAGER_ID = ?, HIRE_DATE = ?, ENT_DATE = ?, ENT_YN = ?
+        WHERE EMP_ID = ?
+    </entry>
+    <entry key="deleteMenu">
+    DELETE
+        FROM employee
+        WHERE EMP_ID = ?
+    </entry>
+
+    <entry key="selectMenu">
+        SELECT EMP_ID, EMP_NAME, EMP_NO, EMAIL, PHONE, DEPT_CODE, JOB_CODE, SAL_LEVEL, SALARY, BONUS, MANAGER_ID, HIRE_DATE, ENT_DATE, ENT_YN
+        FROM employee
+        WHERE EMP_ID = ?
+    </entry>
 </properties>
