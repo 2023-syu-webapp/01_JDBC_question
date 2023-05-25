@@ -1,5 +1,18 @@
 package run;
 
+import model.dto.EmployeeDTO;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Properties;
+import java.util.Scanner;
+
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.getConnection;
+
 public class updateEmployeeInfo {
 
     // 수정할 사원 번호를 입력받고
@@ -7,4 +20,57 @@ public class updateEmployeeInfo {
     // update 성공하면 "직원 정보 수정에 성공하였습니다." 출력
     // update 실패하면 "직원 정보 수정에 실패하였습니다." 출력
 
+    public static void main(String[] args) {
+
+        Connection con = getConnection();
+
+        PreparedStatement pstmt = null;
+        int result = 0;
+
+        EmployeeDTO empDTO = null;
+        Properties prop = new Properties();
+
+        try {
+            prop.loadFromXML(new FileInputStream("jdbc-practice-source/src/main/java/mapper/employee-query.xml"));
+            String query = prop.getProperty("updateEmp");
+
+            empDTO = new EmployeeDTO();
+            Scanner sc = new Scanner(System.in);
+            System.out.print("변경할 사원의 사원번호를 입력하세요 : ");
+            empDTO.setEmpId(sc.next());
+            System.out.print("변경할 사원의 전화번호를 입력하세요 : ");
+            empDTO.setPhone(sc.next());
+            System.out.print("변경할 사원의 이메일을 입력하세요 : ");
+            empDTO.setEmail(sc.next());
+            System.out.print("변경할 사원의 부서번호를 입력하세요 : ");
+            empDTO.setDeptCode(sc.next());
+            System.out.print("변경할 사원의 급여를 입력하세요 : ");
+            empDTO.setSalary(sc.nextInt());
+            System.out.print("변경할 사원의 보너스를 입력하세요 : ");
+            empDTO.setBonus(sc.nextDouble());
+
+            pstmt = con.prepareStatement(query);
+            pstmt.setString(1, empDTO.getPhone());
+            pstmt.setString(2, empDTO.getEmail());
+            pstmt.setString(3, empDTO.getDeptCode());
+            pstmt.setInt(4, empDTO.getSalary());
+            pstmt.setDouble(5, empDTO.getBonus());
+            pstmt.setString(6, empDTO.getEmpId());
+
+            result = pstmt.executeUpdate();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(pstmt);
+            close(con);
+        }
+
+        if (result > 0) {
+            System.out.println("직원 정보 수정에 성공하였습니다.");
+        } else System.out.println("직원 정보 수정에 실패하였습니다.");
+
+    }
 }
