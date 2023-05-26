@@ -3,8 +3,8 @@
 <properties>
     <comment/>
     <entry key="insertEmployee">
-        INSERT INTO TBL_MENU (EMP_ID, EMP_NAME, EMP_NO, EMAIL, PHONE, DEPT_CODE, JOB_CODE, SAL_LEVEL, SALARY, BONUS, MANAGER_ID, HIRE_DATE, ENT_DATE, ENT_YN)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO employee (EMP_NAME, EMP_NO, EMAIL, PHONE, DEPT_CODE, JOB_CODE, SAL_LEVEL, SALARY, BONUS, MANAGER_ID, HIRE_DATE, ENT_DATE, ENT_YN)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     </entry>
     <entry key="updateEmployee">
         UPDATE EMPLOYEE
@@ -19,5 +19,12 @@
         DELETE
         FROM EMPLOYEE
         WHERE EMP_NAME = ?
+    </entry>
+    <entry key="selectEmployee">
+        SELECT E.* , J.JOB_NAME, D.DEPT_TITLE
+        FROM EMPLOYEE AS E, DEPARTMENT AS D, JOB AS J
+        WHERE D.DEPT_ID = E.DEPT_CODE AND
+        E.JOB_CODE = J.JOB_CODE AND
+        E.EMP_ID = ?
     </entry>
 </properties>

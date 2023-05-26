@@ -31,7 +31,7 @@ public class insertEmployeeInfo {
             EmployeeDTO empDTO = null;
 
             try {
-                prop.loadFromXML(new FileInputStream("jdbc-practice-source/src/main/java/mapper/employee-query.xml"));
+                prop.loadFromXML(new FileInputStream("src/main/java/mapper/employee-query.xml"));
 
                 String query = prop.getProperty("insertEmployee");
                 System.out.println(query);
@@ -62,12 +62,11 @@ public class insertEmployeeInfo {
                 String hire = sc.next();
                 DateTimeFormatter Format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 LocalDate date = LocalDate.parse(hire, Format);
-                empDTO.setHireDate(Date.valueOf(date));
+
 
                 System.out.print("직원의 ENT_DATE을 입력하세요 :");
                 String eDate = sc.next();
                 LocalDate date2 = LocalDate.parse(eDate, Format);
-                empDTO.setEntDate(Date.valueOf(date2));
 
                 System.out.print("직원의 ENT_YN을 입력하세요 :");
                 String eYn = sc.next();
@@ -83,6 +82,8 @@ public class insertEmployeeInfo {
                 empDTO.setSalary(sal);
                 empDTO.setBonus(bonus);
                 empDTO.setManagerId(manage);
+                empDTO.setHireDate(Date.valueOf(date));
+                empDTO.setEntDate(Date.valueOf(date2));
                 empDTO.setEntYn(eYn);
 
                 pstmt = con.prepareStatement(query);

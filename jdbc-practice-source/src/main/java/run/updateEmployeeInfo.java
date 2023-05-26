@@ -31,7 +31,7 @@ public class updateEmployeeInfo {
         Properties prop = new Properties();
 
         try {
-            prop.loadFromXML(new FileInputStream("jdbc-practice-source/src/main/java/mapper/employee-query.xml"));
+            prop.loadFromXML(new FileInputStream("src/main/java/mapper/employee-query.xml"));
             String query = prop.getProperty("updateEmp");
 
             empDTO = new EmployeeDTO();

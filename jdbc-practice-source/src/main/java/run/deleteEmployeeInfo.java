@@ -30,15 +30,16 @@ public class deleteEmployeeInfo {
         EmployeeDTO empDTO = null;
 
         Properties prop = new Properties();
+        String name = "";
 
         try {
-            prop.loadFromXML(new FileInputStream("jdbc-practice-source/src/main/java/mapper/employee-query.xml"));
+            prop.loadFromXML(new FileInputStream("src/main/java/mapper/employee-query.xml"));
             String query = prop.getProperty("deleteEmployee");
 
             empDTO = new EmployeeDTO();
             Scanner sc = new Scanner(System.in);
             System.out.print("삭제할 사원의 이름을 입력하세요 : ");
-            String name = sc.next();
+            name = sc.next();
 
             empDTO.setEmpName(name);
             pstmt = con.prepareStatement(query);
@@ -55,7 +56,7 @@ public class deleteEmployeeInfo {
         }
 
         if (result > 0){
-            System.out.println("직원 삭제에 성공하였습니다.");
-        } else System.out.println("직원 삭제에 실패하였습니다.");
+            System.out.println(name+"직원 삭제에 성공하였습니다.");
+        } else System.out.println(name+"직원 삭제에 실패하였습니다.");
     }
 }

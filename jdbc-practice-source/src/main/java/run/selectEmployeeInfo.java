@@ -35,7 +35,7 @@ import static common.JDBCTemplate.getConnection;
             String empId = sc.nextLine();
 
             try {
-                prop.loadFromXML(new FileInputStream("jdbc-practice-source/src/main/java/mapper/employee-query.xml"));
+                prop.loadFromXML(new FileInputStream("src/main/java/mapper/employee-query.xml"));
                 String query = prop.getProperty("selectEmployee");
                 pstmt = con.prepareStatement(query);
 
