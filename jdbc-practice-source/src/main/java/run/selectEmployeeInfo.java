@@ -1,4 +1,18 @@
-package run;
+package main.java.run;
+
+import model.dto.EmployeeDTO;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Properties;
+import java.util.Scanner;
+
+import static common.JDBCTemplate.close;
+import static common.JDBCTemplate.getConnection;
 
 public class selectEmployeeInfo {
 
@@ -6,4 +20,61 @@ public class selectEmployeeInfo {
     // 출력 구문은 DTO 객체의 toString() 내용과
     // "[이름]([부서명]) [직급명]님 환영합니다." 로 출력.
 
+
+    public static void main(String[] args) {
+
+        Connection con = getConnection();
+
+        PreparedStatement pstmt = null;
+        ResultSet rset = null;
+
+        EmployeeDTO emp = new EmployeeDTO();
+
+
+
+        Properties prop = new Properties();
+        try {
+            prop.loadFromXML(new FileInputStream("src/main/java/mapper/employee-query.xml"));
+
+            String query = prop.getProperty("selectEmployeeInfo");
+            pstmt = con.prepareStatement(query);
+
+            Scanner sc = new Scanner(System.in);
+
+            System.out.print("조회할 사원의 번호를 입력하세요 : ");
+            emp.setEmpId(String.valueOf(sc.nextInt()));
+            sc.nextLine();
+
+            pstmt.setInt(1, Integer.parseInt(emp.getEmpId()));
+
+            rset = pstmt.executeQuery();
+
+            while (rset.next()){
+                emp.setEmpName(rset.getString("EMP_NAME"));
+                emp.setEmpNo(rset.getString("EMP_NO"));
+                emp.setEmail(rset.getString("EMAIL"));
+                emp.setPhone(rset.getString("PHONE"));
+                emp.setDeptCode(rset.getString("DEPT_CODE"));
+                emp.setJobCode(rset.getString("JOB_CODE"));
+                emp.setSalLevel(rset.getString("SAL_LEVEL"));
+                emp.setSalary(rset.getInt("SALARY"));
+                emp.setBonus(rset.getDouble("BONUS"));
+                emp.setManagerId(rset.getString("MANAGER_ID"));
+                emp.setHireDate(rset.getDate("HIRE_DATE"));
+                emp.setEntDate(rset.getDate("ENT_DATE"));
+                emp.setEntYn(rset.getString("ENT_YN"));
+            }
+
+            System.out.println("["+emp.getEmpName()+"](["+emp.getDeptCode()+"]) ["+emp.getSalLevel()+"]님 환영합니다.");
+            System.out.println(emp);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            close(rset);
+            close(pstmt);
+            close(con);
+        }
+    }
 }
