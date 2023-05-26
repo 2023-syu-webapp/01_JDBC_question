@@ -5,6 +5,7 @@ import model.dto.EmployeeDTO;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -23,82 +24,89 @@ public class insertEmployeeInfo {
 
         PreparedStatement pstmt = null;
         int result = 0;
+        EmployeeDTO eDTO = new EmployeeDTO();
 
         Properties prop = new Properties();
 
         try {
-            prop.loadFromXML(new FileInputStream("C:\\java22\\01_JDBC_question\\jdbc-practice-source\\src\\main\\java\\mapper\\employee-query.xml"));
-
-            String query = prop.getProperty("insert");
+            prop.loadFromXML(new FileInputStream("src/main/java/mapper/employee-query.xml"));
+            String query = prop.getProperty("insertEmployee");
 
             Scanner sc = new Scanner(System.in);
-            System.out.println("30이상을 입력하세요");
-            String answer = sc.nextLine();
-            System.out.println("22");
-            String name = sc.nextLine();
-            System.out.println("22");
-            String name2 = sc.nextLine();
-            System.out.println("22");
-            String name3 = sc.nextLine();
-            System.out.println("22");
-            String name4 = sc.nextLine();
-            System.out.println("22");
-            String name5 = sc.nextLine();
-            System.out.println("22");
-            String name6 = sc.nextLine();
-            System.out.println("22");
-            String name7 = sc.nextLine();
-            System.out.println("22");
-            String name8 = sc.nextLine();
-            System.out.println("22");
-            String name9 = sc.nextLine();
-            System.out.println("22");
-            String name10 = sc.nextLine();
-            System.out.println("22");
-            String name11 = sc.nextLine();
-            System.out.println("22");
-            String name12 = sc.nextLine();
-            System.out.println("22");
-            String name13 = sc.nextLine();
+            System.out.println("등록하실 사원의 번호를 입력하세요 : ");
+            String empId = sc.nextLine();
+            System.out.println("등록하실 사원의 이름을 입력하세요 : ");
+            String empName = sc.nextLine();
+            System.out.println("등록하실 사원의 주민번호를 입력하세요 : ");
+            String empNo = sc.nextLine();
+            System.out.println("등록하실 사원의 이메일을 입력하세요 : ");
+            String email = sc.nextLine();
+            System.out.println("등록하실 사원의 전화번호를 입력하세요 : ");
+            String phone = sc.nextLine();
+            System.out.println("등록하실 사원의 부서 번호를 입력하세요 : ");
+            String deptCode = sc.nextLine();
+            System.out.println("등록하실 사원의 job 번호를 입력하세요 : ");
+            String jobCode = sc.nextLine();
+            System.out.println("등록하실 사원의 봉급레벨을 입력하세요 : ");
+            String salLevel = sc.nextLine();
+            System.out.println("등록하실 사원의 봉금을 입력하세요 : ");
+            int salary = sc.nextInt();
+            System.out.println("등록하실 사원의 보너스를 입력하세요 : ");
+            Double bonus = sc.nextDouble();
+            System.out.println("등록하실 사원의 사수 번호를 입력하세요 : ");
+            String managerId = sc.nextLine();
+            sc.nextLine();
+            System.out.println("등록하실 사원의 생년월일을 입력하세요 : ");
+            Date hireDate = Date.valueOf(sc.nextLine());
+            System.out.println("등록하실 사원의 퇴사 여부를 입력하세요 : ");
+            String entYn = sc.nextLine();
 
-
-            EmployeeDTO eDto = new EmployeeDTO();
-
-            eDto.setEmpId(answer);
+            eDTO.setEmpId(empId);
+            eDTO.setEmpName(empName);
+            eDTO.setEmpNo(empNo);
+            eDTO.setEmail(email);
+            eDTO.setPhone(phone);
+            eDTO.setDepCode(deptCode);
+            eDTO.setJobCode(jobCode);
+            eDTO.setSallLevel(salLevel);
+            eDTO.setSalary(salary);
+            eDTO.setBonus(bonus);
+            eDTO.setManagerId(managerId);
+            eDTO.setHireDate(hireDate);
+            eDTO.setEntYn(entYn);
 
             pstmt = con.prepareStatement(query);
-
-            pstmt.setString(1, answer);
-            pstmt.setString(2, name);
-            pstmt.setString(3, name2);
-            pstmt.setString(4, name3);
-            pstmt.setString(5, name4);
-            pstmt.setString(6, name5);
-            pstmt.setString(7, name6);
-            pstmt.setString(8, name7);
-            pstmt.setString(9, name8);
-            pstmt.setString(10, name9);
-            pstmt.setString(11, name10);
-            pstmt.setString(12, name11);
-            pstmt.setString(13, name12);
-            pstmt.setString(14, name13);
-
+            pstmt.setString(1, eDTO.getEmpId());
+            pstmt.setString(2, eDTO.getEmpName());
+            pstmt.setString(3, eDTO.getEmpNo());
+            pstmt.setString(4, eDTO.getEmail());
+            pstmt.setString(5, eDTO.getPhone());
+            pstmt.setString(6, eDTO.getDepCode());
+            pstmt.setString(7, eDTO.getJobCode());
+            pstmt.setString(8, eDTO.getSallLevel());
+            pstmt.setInt(9, eDTO.getSalary());
+            pstmt.setDouble(10, eDTO.getBonus());
+            pstmt.setString(11, eDTO.getManagerId());
+            pstmt.setString(12, String.valueOf(eDTO.getHireDate()));
+            pstmt.setString(13, eDTO.getEntYn());
 
             result = pstmt.executeUpdate();
 
-
         } catch (IOException e) {
-            e.printStackTrace();
+           e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
             closes(con);
             closes(pstmt);
         }
-        if (result > 0){
-            System.out.println(1);
+
+        if (result > 0) {
+            System.out.println("직원등록에 성공했습니다.");
+            System.out.println("result = " + result);
         } else {
-            System.out.println(0);
+            System.out.println("직원등록에 실패했습니다..");
+            System.out.println("result = " + result);
         }
     }
 }
