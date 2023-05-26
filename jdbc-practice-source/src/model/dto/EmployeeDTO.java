@@ -1,7 +1,6 @@
-package main.java.model.dto;
+package model.dto;
 
 import java.sql.Date;
-
 public class EmployeeDTO implements java.io.Serializable {
 
     // employee table과 매핑되도록 DTO 작성
@@ -17,8 +16,8 @@ public class EmployeeDTO implements java.io.Serializable {
     private int salary;
     private double bonus;
     private String managerId;
-    private Date hireDate;
-    private Date entDate;
+    private java.sql.Date hireDate;
+    private java.sql.Date entDate;
     private String entYn;
 
     public EmployeeDTO() {}
