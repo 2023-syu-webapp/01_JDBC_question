@@ -39,7 +39,7 @@ public class insertEmployeeInfo {
 
             Scanner sc = new Scanner(System.in);
 
-            System.out.print("등록할 사원의 번호를 입력하세요 : ");
+            System.out.print("등록할 사원의 번호를  입력하세요 : ");
             emp.setEmpId(String.valueOf(sc.nextInt()));
             sc.nextLine();
             System.out.print("등록할 사원의 이름을 입력하세요 : ");
