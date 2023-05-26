@@ -30,7 +30,7 @@ public class insertEmployeeInfo {
         Date entDate;
 
         try {
-            prop.loadFromXML(new FileInputStream("jdbc-practice-source/src/main/java/mapper/employee-query.xml"));
+            prop.loadFromXML(new FileInputStream("src/main/java/mapper/employee-query.xml"));
             String query = prop.getProperty("insertEmp");
 
             System.out.print("직원의 id를 입력하세요 : ");
