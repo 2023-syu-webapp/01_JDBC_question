@@ -27,7 +27,7 @@ public class updateEmployeeInfo {
         Properties prop = new Properties();
 
         try {
-            prop.loadFromXML(new FileInputStream("src/main/java/mapper/employee-query.xml"));
+            prop.loadFromXML(new FileInputStream("jdbc-practice-source/src/main/java/config/connection-info.properties"));
             String query = prop.getProperty("updateEmployee");
 
             Scanner sc = new Scanner(System.in);

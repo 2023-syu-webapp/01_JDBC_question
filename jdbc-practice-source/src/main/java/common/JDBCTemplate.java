@@ -8,14 +8,14 @@ import java.util.Properties;
 
 public class JDBCTemplate {
 
-    // Connection 생성 및 자원 반납을 위한 static method 작성
+
     public static Connection getConnection(){
 
         Connection con = null;
         Properties prop = new Properties();
 
         try {
-            prop.load(new FileReader("src/main/java/config/connection-info.properties"));
+            prop.load(new FileReader("jdbc-practice-source/src/main/java/config/connection-info.properties"));
 
             String driver = prop.getProperty("driver");
             String url = prop.getProperty("url");
