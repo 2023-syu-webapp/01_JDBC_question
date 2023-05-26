@@ -3,4 +3,27 @@
 <properties>
     <comment/>
     <!-- 쿼리 작성 -->
+    <entry key="insertEmployee">
+        INSERT INTO EMPLOYEE (EMP_NAME, EMP_NO, EMAIL, PHONE, DEPT_CODE, JOB_CODE, SAL_LEVEL, SALARY, BONUS, MANAGER_ID, HIRE_DATE, ENT_DATE, ENT_YN)
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    </entry>
+    <entry key="updateEmployee">
+        UPDATE EMPLOYEE
+        SET EMAIL = ?
+        ,PHONE = ?
+        ,DEPT_CODE = ?
+        ,SALARY = ?
+        ,BONUS = ?
+        WHERE EMP_ID = ?
+    </entry>
+    <entry key="selectEmployee">
+        SELECT EMP_ID, EMP_NAME, EMP_NO, EMAIL, PHONE, DEPT_CODE, JOB_CODE, SAL_LEVEL, SALARY, BONUS, MANAGER_ID, HIRE_DATE, ENT_DATE, ENT_YN
+        FROM EMPLOYEE
+        WHERE EMP_ID = ?
+    </entry>
+    <entry key="deleteMenu">
+        DELETE
+        FROM EMPLOYEE
+        WHERE EMP_NAME = ?
+    </entry>
 </properties>
