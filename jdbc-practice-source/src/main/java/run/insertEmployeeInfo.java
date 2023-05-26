@@ -99,6 +99,7 @@ public class insertEmployeeInfo {
         } finally {
             closes(con);
             closes(pstmt);
+
         }
 
         if (result > 0) {
