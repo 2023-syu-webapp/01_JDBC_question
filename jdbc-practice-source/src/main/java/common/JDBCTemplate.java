@@ -20,7 +20,7 @@ public class JDBCTemplate {
             Class.forName(driver);
             con = DriverManager.getConnection(url, prop);
         } catch (IOException | ClassNotFoundException | SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         return con;
     }
