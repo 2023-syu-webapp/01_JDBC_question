@@ -6,5 +6,4 @@ public class insertEmployeeInfo {
     // insert 성공하면 "직원 등록에 성공하였습니다." 출력
     // insert 실패하면 "직원 등록에 실패하였습니다." 출력
 
-
 }

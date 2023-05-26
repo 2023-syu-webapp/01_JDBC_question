@@ -6,5 +6,4 @@ public class selectEmployeeInfo {
     // 출력 구문은 DTO 객체의 toString() 내용과
     // "[이름]([부서명]) [직급명]님 환영합니다." 로 출력.
 
-
 }
